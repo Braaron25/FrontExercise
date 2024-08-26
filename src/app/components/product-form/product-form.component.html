@@ -1,0 +1,72 @@
+<div class="container form-container">
+  <div class="card">
+
+    <h2 class="text-center card-title">{{ !editMode ? "Formulario de Registro" : "Editar Producto" }}</h2>
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+      <div class="div-form">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input id="id" formControlName="id" type="text" />
+          <div *ngIf="id!.invalid && (id!.dirty || id!.touched)" class="error">
+            <div *ngIf="id!.errors!['required']">Este campo es requerido!</div>
+            <div *ngIf="id!.errors!['minlength']">Se requiere minimo 3 caracteres!</div>
+            <div *ngIf="id!.errors!['maxlength']">Se requiere maximo 10 caracteres!</div>
+            <div *ngIf="id!.errors!['idInvalid']">Este id ya esta en uso!</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input id="name" formControlName="name" type="text" />
+          <div *ngIf="name!.invalid && (name!.dirty || name!.touched)" class="error">
+            <div *ngIf="name!.errors!['required']">Este campo es requerido!</div>
+            <div *ngIf="name!.errors!['minlength']">Se requiere minimo 5 caracteres!</div>
+            <div *ngIf="name!.errors!['maxlength']">Se requiere maximo 100 caracteres!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="div-form">
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <input id="description" formControlName="description" type="text" />
+          <div *ngIf="description!.invalid && (description!.dirty || description!.touched)" class="error">
+            <div *ngIf="description!.errors!['required']">Este campo es requerido!</div>
+            <div *ngIf="description!.errors!['minlength']">Se requiere minimo 10 caracteres!</div>
+            <div *ngIf="description!.errors!['maxlength']">Se requiere maximo 200 caracteres!</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="logo">Logo</label>
+          <input id="logo" formControlName="logo" type="text" />
+          <div *ngIf="logo!.invalid && (logo!.dirty || logo!.touched)" class="error">
+            <div *ngIf="logo!.errors!['required']">Este campo es requerido!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="div-form">
+        <div class="form-group">
+          <label for="date_release">Fecha Liberación</label>
+          <input id="date_release" formControlName="date_release" type="date" />
+          <div *ngIf="date_release!.invalid && (date_release!.dirty || date_release!.touched)" class="error">
+            <div *ngIf="date_release!.errors!['required']">Este campo es requerido!</div>
+            <div *ngIf="date_release!.errors!['dateReleaseInvalid']">Fecha no valida!</div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="date_revision">Fecha Revisión</label>
+          <input id="date_revision" formControlName="date_revision" type="date" [disabled]="true" />
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn-default gray" type="button" (click)="resetForm()">Reiniciar</button>
+        <button class="btn-default" type="submit" [disabled]="registroForm.invalid">Enviar</button>
+      </div>
+    </form>
+  </div>
+</div>
